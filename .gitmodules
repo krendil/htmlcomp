@@ -1,0 +1,3 @@
+[submodule "arsd"]
+	path = include/arsd
+	url = https://github.com/adamdruppe/misc-stuff-including-D-programming-language-web-stuff

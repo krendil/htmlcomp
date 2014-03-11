@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="no-js h-entry hentry h-as-article" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		
+		
+		<!-- So you’re having a peek at my source code. That’s cool :) -->
+		<!-- I use some fairly experimental markup, for more details check out 
+		http://waterpigs.co.uk/articles/experimental-markup -->
+		<!-- Any other questions, just get in contact. -->
+		
+		
+		<title>Barnaby Walters</title>
+		<meta name="author" content="Barnaby Walters">
+		
+		<link rel="openid.delegate" href="http://waterpigs.co.uk/">
+		<link rel="openid.server" href="https://www.indieauth.com/openid">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="hub" href="http://pubsubhubbub.appspot.com/">
+		
+		<link rel="webmention http://webmention.org/" href="http://waterpigs.co.uk/mentions/webmention/">
+		<link rel="pingback" href="http://webmention.io/webmention?forward=http://waterpigs.co.uk/mentions/webmention/">
+		
+		<link rel="shortcut icon" href="getting-started-with-microformats2_files/photo.jpg">
+		<link rel="apple-touch-icon-precomposed" href="getting-started-with-microformats2_files/photo.jpg">
+		
+		<link rel="authorization_endpoint" href="https://indieauth.com/auth">
+		<link rel="token_endpoint" href="http://waterpigs.co.uk/token/">
+		<link rel="micropub" href="http://waterpigs.co.uk/">
+		
+				
+		<link rel="stylesheet" href="getting-started-with-microformats2_files/styles.css">
+		<link rel="stylesheet" href="getting-started-with-microformats2_files/leaflet.css">
+		<!--[if lte IE 8]>
+			 <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.1/leaflet.ie.css" />
+		<![endif]-->
+		
+		<!--[if lt IE 9]>
+				<script src="/js/html5.js"></script>
+		<![endif]-->
+		<script src="getting-started-with-microformats2_files/require.js" data-main="/js/app"></script><script src="getting-started-with-microformats2_files/app.js" data-requiremodule="app" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="getting-started-with-microformats2_files/bean.js" data-requiremodule="bean" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script><script src="getting-started-with-microformats2_files/scrolling-panorama.js" data-requiremodule="scrolling-panorama" data-requirecontext="_" async="" charset="utf-8" type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="nav-placeholder">
+			<a href="#page-navigation">Menu ⇓</a>
+		</div>
+		<header role="banner" id="page-header" class="clearfix">
+			<nav role="navigation" id="page-navigation">
+				<ul>
+					<li class="nav-top"><a href="#">Top ⇑</a></li>
+					<li><a class="header-home" href="http://waterpigs.co.uk/" accesskey="h"><img src="getting-started-with-microformats2_files/photo.jpg" alt=""> Barnaby Walters</a></li>
+					<li><a href="http://waterpigs.co.uk/notes/" accesskey="n">Notes</a></li>
+					<li><a href="http://waterpigs.co.uk/articles/" accesskey="b">Articles</a></li>
+					<li><a href="http://waterpigs.co.uk/music/" accesskey="g">Music</a></li>
+					<li><a href="http://waterpigs.co.uk/pig/" accesskey="p">ABCPig</a></li>
+				</ul>
+			</nav>
+			<form class="search" action="http://www.google.com/search" method="get">
+				<input name="as_sitesearch" value="waterpigs.co.uk" type="hidden">
+				<input name="tbs" value="sbd:1,cdr:1,cd_min:1/1/1970" type="hidden">
+				<input name="q" type="search">
+				<button type="submit">Search</button>
+			</form>
+		</header><section role="main" class="clearfix">
+	<article role="article" class="article-single" id="article-getting-started-with-microformats2">
+		<header class="article-header">
+			<h1 class="p-name entry-title"><a class="u-url url" href="http://waterpigs.co.uk/articles/getting-started-with-microformats2/">Getting started with microformats2</a></h1>
+			
+			<p class="article-published"><time class="dt-published published" datetime="2014-03-05T14:12:39+00:00">2014-03-05 14:12</time></p>
+		</header>
+		
+				<div class="p-summary entry-summary article-summary">Classic microformats have been serving the web community’s need to extend HTML’s expressive power <a href="http://microformats.org/wiki/history#2004">since 2004</a>. Through an evolutionary, open, rigorous community process and human-first design principles, structured use of the <code>class</code> and <code>rel</code> attributes have paved the cowpaths of publishing data about people, places, events, reviews, products and more.</div>
+				
+		<div class="e-content entry-content article-content"><p>Microformats2 
+is the next big effort by the community to improve how microformats are 
+authored, parsed and defined. Version two has multiple working open 
+source implementations which independents are using in production and is
+ easier to publish and consume than ever.</p>
+
+<p>In this series of guides I’ll show you how to be the next site publishing and consuming microformats.</p>
+
+<p class="info">
+You can see how a microformats parser sees your markup by pasting any of the code samples below into <a href="http://waterpigs.co.uk/php-mf2">this php-mf2 sandbox</a>. Go ahead and experiment with adding more properties and see what happens!
+</p>
+
+<h2>Incremental Steps</h2>
+
+<p>In order to demonstrate some of the differences between microformats 2
+ and Classic Microformats/other competing technologies, I’ll use the 
+process of content-out markup — going from plain text to HTML and 
+finally adding a sprinkling of microformats. Let’s start with my 
+favourite example: mentioning a person.</p>
+
+<p>As plain text:</p>
+
+<pre><code>Barnaby Walters
+</code></pre>
+
+<p>With HTML:</p>
+
+<pre><code>&lt;a href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt;
+</code></pre>
+
+<p>With classic microformats:</p>
+
+<pre><code>&lt;span class="vcard"&gt;&lt;a class="fn n url" href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt;&lt;/span&gt;
+</code></pre>
+
+<p>That’s 37 extra characters and a whole extra nested element just to 
+say “This link is to a person”, not to mention the strangely named root 
+classname (vcard? I thought this was an hcard?) and multiple cryptic <code>fn n</code> classnames. Competing technologies are typically even longer and messier.</p>
+
+<p>With microformats 2 this all becomes much simpler:</p>
+
+<pre><code>&lt;a class="h-card" href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt;
+</code></pre>
+
+<p>Weighing in at only 15 characters, this is quicker to type, easier on the eyes and easier to remember.</p>
+
+<p>There are two fundamental changes in microformats 2 which make this 
+helium-esque lightness possible: Implied Properties and prefixed 
+classnames.</p>
+
+<h2>Implied Properties</h2>
+
+<p>When you give <code>class=h-card</code> to an element, you’re saying 
+“This element represents a person”. In many cases the element will be 
+simple; just a name, perhaps with a link or photo.  Why should you add 
+extra elements and classnames just to tell a dumb computer which bit is 
+the name, URL or photo URL when that information is already expressed by
+ the markup?</p>
+
+<p>Implied properties save you from this tedium. When you specify an 
+element as an h-card without explicitly defining which parts are the 
+name, url or photo url, the parser will figure out what you meant. And 
+it’s not just for h-cards either — thanks to the new generic parsing in 
+microformats 2, this shorthand works for any microformat.</p>
+
+<h2>Prefixed Classnames</h2>
+
+<p>Classic microformats used plain classnames which looked like any other (e.g. <code>vcard</code>, <code>n</code> or <code>note</code>).
+ There were a few problems with this — classnames would clash, cause 
+false positives or be thrown away by developers who weren’t 
+microformats-aware (“these classnames aren’t doing anything!”).</p>
+
+<p>This also meant parsers were tricky to write, as each one had to 
+maintain a long list of classnames used by each microformats, resulting 
+in many parsers quickly going out of date.</p>
+
+<p>Prefixing classnames solves both of these problems: semantic 
+microformats2 classnames are set apart from styling hooks, and parsers 
+can figure out which classnames to look for, cutting down on 
+maintenance. There are 5 prefixes:</p>
+
+<ul>
+<li><code>h-*</code> root classnames specify that an element is a microformat, e.g. <code>&lt;span class="h-card"&gt;</code></li>
+<li><code>p-*</code> specifies an element as a plain-text property, e.g. <code>&lt;span class="p-name"&gt;My Name&lt;/span&gt;</code></li>
+<li><code>u-*</code> parses an element as a URL, e.g. <code>&lt;a class="u-url" href="/"&gt;&lt;/a&gt;</code></li>
+<li><code>dt-*</code> parses an element as a date/time, e.g. <code>&lt;time class="dt-published" datetime="2013-05-02 12:00:00" /&gt;</code></li>
+<li><code>e-*</code> parses an element’s whole inner HTML, e.g. <code>&lt;div class="e-content"&gt;</code></li>
+</ul>
+
+<p>I’ll demonstrate the use of all of these prefixes with some real-world examples.</p>
+
+<p>Firstly, another h-card, more fleshed out than the earlier example. This might be the sort that you put on your homepage:</p>
+
+<pre><code>&lt;div class="h-card"&gt;
+    &lt;p&gt;&lt;img class="u-photo" href="/me.png" alt="" /&gt;&lt;/p&gt;
+    
+    &lt;p class="p-name"&gt;&lt;a href="u-url" href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>p-name, u-url and u-photo are fairly standard properties you’ll see 
+over and over again. Another improvement in microformats 2 is increasing
+ consistency between different microformat specifications — again, 
+making them easier to authors to remember and consumers to understand. A
+ nice side effect is that a single element can be more than one type of 
+microformat at once — for example a h-entry and h-review.</p>
+
+<p>To demonstrate <code>dt-*</code> and <code>e-*</code>, here’s a note (like a tweet or short blog post), marked up using <code>h-entry</code>:</p>
+
+<pre><code>&lt;article class="h-entry"&gt;
+    &lt;div class="e-content p-summary p-name"&gt;
+        &lt;p&gt;
+            Just writing a guide to using &lt;a href="http://microformats.org/wiki/microformats-2"&gt;microformats-2&lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/div&gt;
+    
+    &lt;time class="dt-published" datetime="2013-05-01 12:00:00"&gt;20 minutes ago&lt;/time&gt;
+&lt;/article&gt;
+</code></pre>
+
+<p>Here, I want the HTML inside the content to be passed to the parser, so I mark it up as <code>e-*</code>. Notice I’m also specifying that content as the summary and name — one element can be parsed as multiple properties.</p>
+
+<p>I’m using the <code>time</code> element to mark up the time this note was published. Because I’ve prefixed the classname with <code>dt-</code> and it’s on a <code>time</code> element, parsers know to look in the <code>datetime</code> attribute if it exists.</p>
+
+<h2>Combining Microformats</h2>
+
+<p>The third area in which microformats2 improves on the previous 
+version is in combining microformats and making each microformat 
+specification more reusable — for example, both a person or an event 
+might have an address, so it makes sense to reuse the same markup for 
+both.</p>
+
+<p>There are many reasons to combine microformats — say you want to 
+specify the author of a blog post or review. You would do so by making 
+the p-author of the post an h-card:</p>
+
+<pre><code>&lt;article class="h-entry"&gt;
+    &lt;p class="p-author h-card"&gt;Barnaby Walters&lt;/p&gt;
+    &lt;p class="p-content"&gt;Blah blah blah&lt;/p&gt;
+    …
+</code></pre>
+
+<p>Or a comment on an article, via <code>h-cite</code>s as <code>p-comment</code>s:</p>
+
+<pre><code>    …
+    &lt;article class="p-comment h-cite"&gt;
+        &lt;p class="p-author h-card"&gt;Jón Jónsson&lt;/p&gt;
+        &lt;p class="p-summary"&gt;Woah that’s insightful.&lt;/p&gt;
+        &lt;p&gt;
+            &lt;a class="u-url" href="http://jonsson.com/replies/1"&gt;
+                &lt;time class="dt-published" datetime="2014-03-01T14:00:25+00:00&gt;2014-03-01 14:00&lt;/time&gt;
+            &lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/article&gt;
+&lt;/article&gt;
+</code></pre>
+
+<p>The reason comments are <code>h-cite</code>s instead of <code>h-entries</code> is that <code>h-entry</code>
+ implies syndication — it’s something you’ve posted, or have re-posted, 
+whereas a comment should be a reference to a post on another site.</p>
+
+<p>Or the address of a person or event, using <code>h-adr</code>:</p>
+
+<pre><code>&lt;div class="h-event"&gt;
+    &lt;h1 class="p-name"&gt;Microformats Meetup&lt;/h1&gt;
+    &lt;p&gt;Join us at &lt;b class="p-adr h-adr"&gt;
+        &lt;span class="p-street-address"&gt;Some Bar&lt;/span&gt;,
+        &lt;span class="p-locality"&gt;Someplace&lt;/span&gt;&lt;/b&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2>Further Reading</h2>
+
+<p>Hopefully this overview tickled your interest and gave you a firm 
+foundation from which to base further investigation. To learn more about
+ the topics covered in this post, see the following URLs:</p>
+
+<ul>
+<li>The <a href="http://microformats.org/wiki/microformats-2">Microformats 2 Wiki</a>, specifically:</li>
+<li><a href="http://microformats.org/wiki/microformats-2-parsing">Microformats 2 Parsing</a></li>
+<li><a href="http://microformats.org/wiki/microformats2-prefixes">Microformats 2 Prefixes</a></li>
+<li>The <a href="http://waterpigs.co.uk/presentations/microformats-2/#slide-2">Microformats 2: What’s New</a> presentation I gave at Exeter Web</li>
+</ul>
+
+<p>This post is the first of a series covering microformats2. Be sure to follow <a href="http://waterpigs.co.uk/articles">my articles feed</a> to be notified about the others. I also post <a href="http://waterpigs.co.uk/notes?tagged=microformats">notes</a> about microformats quite often. They're syndicated to <a href="https://twitter.com/barnabywalters">my twitter account</a> too.</p>
+</div>
+		
+		<footer class="article-footer">
+			<p class="article-mention-counts">1 <img class="compact-mention-icon" src="getting-started-with-microformats2_files/repost-icon.svg" alt="reposts"> 1 <img class="compact-mention-icon" src="getting-started-with-microformats2_files/like-icon.svg" alt="likes"> </p>
+			
+							<div class="compact-mentions clearfix">
+		<article class="h-entry p-comment clearfix like-relation">
+		<img class="compact-mention-icon" src="getting-started-with-microformats2_files/like-icon.svg" alt="">
+		<a class="p-author h-card" href="http://twitter.com/cstanhope">
+					<img class="u-photo photo" src="getting-started-with-microformats2_files/f633f7a7319fee4849e1b9f504f5efd6_normal.png" alt="">
+				Charles Stanhope		</a>
+		
+				<div class="e-content p-summary p-name like-content">
+			
+  
+  favorited this.
+  		</div>
+				
+		<span class="published-datetime">
+			<a class="u-url url" href="http://twitter.com/BarnabyWalters/status/441214864111849472">			<time class="dt-published" datetime="2014-03-06T00:17:57+00:00">2014-03-06 00:17</time>
+			</a>		</span>
+		
+			</article>
+		<article class="h-entry p-comment clearfix repost-relation">
+		<img class="compact-mention-icon" src="getting-started-with-microformats2_files/repost-icon.svg" alt="">
+		<a class="p-author h-card" href="http://waterpigs.co.uk/">
+					<img class="u-photo photo" src="getting-started-with-microformats2_files/4a57cddee3c50aefa893005dcdd33b64.png" alt="">
+				waterpigs.co.uk/		</a>
+		
+				<div class="e-content p-summary p-name repost-content">
+			
+				<p>Classic microformats have been serving the web community’s need to extend HTML’s expressive power <a href="http://microformats.org/wiki/history#2004">since 2004</a>. Through an evolutionary, open, rigorous community process and human-first design principles, structured use of the <code>class</code> and <code>rel</code> attributes have paved the cowpaths of publishing data about people, places, events, reviews, products and more.</p>
+<p>Microformats2 is the next big effort by the community to improve how 
+microformats are authored, parsed and defined. Version two has multiple 
+working open source implementations which independents are using in 
+production and is easier to publish and consume than ever.</p>
+<p>In this series of guides I’ll show you how to be the next site publishing and consuming microformats.</p>
+<p class="info">You can see how a microformats parser sees your markup by pasting any of the code samples below into <a href="http://waterpigs.co.uk/php-mf2">this php-mf2 sandbox</a>. Go ahead and experiment with adding more properties and see what happens!</p>
+<h2>Incremental Steps</h2>
+<p>In order to demonstrate some of the differences between microformats 2
+ and Classic Microformats/other competing technologies, I’ll use the 
+process of content-out markup — going from plain text to HTML and 
+finally adding a sprinkling of microformats. Let’s start with my 
+favourite example: mentioning a person.</p>
+<p>As plain text:</p>
+<pre><code>Barnaby Walters </code></pre>
+<p>With HTML:</p>
+<pre><code>&lt;a href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt; </code></pre>
+<p>With classic microformats:</p>
+<pre><code>&lt;span class="vcard"&gt;&lt;a class="fn n url" href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt; </code></pre>
+<p>That’s 37 extra characters and a whole extra nested element just to 
+say “This link is to a person”, not to mention the strangely named root 
+classname (vcard? I thought this was an hcard?) and multiple cryptic <code>fn n</code> classnames. Competing technologies are typically even longer and messier.</p>
+<p>With microformats 2 this all becomes much simpler:</p>
+<pre><code>&lt;a class="h-card" href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt; </code></pre>
+<p>Weighing in at only 15 characters, this is quicker to type, easier on the eyes and easier to remember.</p>
+<p>There are two fundamental changes in microformats 2 which make this 
+helium-esque lightness possible: Implied Properties and prefixed 
+classnames.</p>
+<h2>Implied Properties</h2>
+<p>When you give <code>class=h-card</code> to an element, you’re saying 
+“This element represents a person”. In many cases the element will be 
+simple; just a name, perhaps with a link or photo. Why should you add 
+extra elements and classnames just to tell a dumb computer which bit is 
+the name, URL or photo URL when that information is already expressed by
+ the markup?</p>
+<p>Implied properties save you from this tedium. When you specify an 
+element as an h-card without explicitly defining which parts are the 
+name, url or photo url, the parser will figure out what you meant. And 
+it’s not just for h-cards either — thanks to the new generic parsing in 
+microformats 2, this shorthand works for any microformat.</p>
+<h2>Prefixed Classnames</h2>
+<p>Classic microformats used plain classnames which looked like any other (e.g. <code>vcard</code>, <code>n</code> or <code>note</code>).
+ There were a few problems with this — classnames would clash, cause 
+false positives or be thrown away by developers who weren’t 
+microformats-aware (“these classnames aren’t doing anything!”).</p>
+<p>This also meant parsers were tricky to write, as each one had to 
+maintain a long list of classnames used by each microformats, resulting 
+in many parsers quickly going out of date.</p>
+<p>Prefixing classnames solves both of these problems: semantic 
+microformats2 classnames are set apart from styling hooks, and parsers 
+can figure out which classnames to look for, cutting down on 
+maintenance. There are 5 prefixes:</p>
+<ul><li><code>h-*</code> root classnames specify that an element is a microformat, e.g. <code>&lt;span class="h-card"&gt;</code></li>
+<li><code>p-*</code> specifies an element as a plain-text property, e.g. <code>&lt;span class="p-name"&gt;My Name&lt;/span&gt;</code></li>
+<li><code>u-*</code> parses an element as a URL, e.g. <code>&lt;a class="u-url" href="/"&gt;&lt;/a&gt;</code></li>
+<li><code>dt-*</code> parses an element as a date/time, e.g. <code>&lt;time class="dt-published" datetime="2013-05-02 12:00:00" /&gt;</code></li>
+<li><code>e-*</code> parses an element’s whole inner HTML, e.g. <code>&lt;div class="e-content"&gt;</code></li>
+</ul><p>I’ll demonstrate the use of all of these prefixes with some real-world examples.</p>
+<p>Firstly, another h-card, more fleshed out than the earlier example. This might be the sort that you put on your homepage:</p>
+<pre><code>&lt;div class="h-card"&gt;
+  &lt;p&gt;&lt;img class="u-photo" href="/me.png" alt="" /&gt;&lt;/p&gt;
+  &lt;p class="p-name"&gt;
+    &lt;a href="u-url" href="http://waterpigs.co.uk"&gt;Barnaby Walters&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>p-name, u-url and u-photo are fairly standard properties you’ll see 
+over and over again. Another improvement in microformats 2 is increasing
+ consistency between different microformat specifications — again, 
+making them easier to authors to remember and consumers to understand. A
+ nice side effect is that a single element can be more than one type of 
+microformat at once — for example a h-entry and h-review.</p>
+<p>To demonstrate <code>dt-*</code> and <code>e-*</code>, here’s a note (like a tweet or short blog post), marked up using <code>h-entry</code>:</p>
+<pre><code>&lt;article class="h-entry&gt;
+  &lt;div class="e-content p-summary p-name"&gt;
+    &lt;p&gt;Just writing a guide to using &lt;a href="http://microformats.org/wiki/microformats-2"&gt;
+microformats-2&lt;/a&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;time class="dt-published" datetime="2013-05-01 12:00:00"&gt;20 minutes ago&lt;/time&gt; 
+&lt;/article&gt; </code></pre>
+<p>Here, I want the HTML inside the content to be passed to the parser, so I mark it up as <code>e-*</code>. Notice I’m also specifying that content as the summary and name — one element can be parsed as multiple properties.</p>
+<p>I’m using the <code>time</code> element to mark up the time this note was published. Because I’ve prefixed the classname with <code>dt-</code> and it’s on a <code>time</code> element, parsers know to look in the <code>datetime</code> attribute if it exists.</p>
+<h2>Combining Microformats</h2>
+<p>The third area in which microformats2 improves on the previous 
+version is in combining microformats and making each microformat 
+specification more reusable — for example, both a person or an event 
+might have an address, so it makes sense to reuse the same markup for 
+both.</p>
+<p>There are many reasons to combine microformats — say you want to 
+specify the author of a blog post or review. You would do so by making 
+the p-author of the post an h-card:</p>
+<pre><code>&lt;article class="h-entry"&gt;
+  &lt;p class="p-author h-card"&gt;Barnaby Walters&lt;/p&gt;
+  &lt;p class="p-content"&gt;Blah blah blah&lt;/p&gt;
+  … </code></pre>
+<p>Or a comment on an article, via <code>h-cite</code>s as <code>p-comment</code>s:</p>
+<pre><code>
+  …
+  &lt;article class="p-comment h-cite"&gt;
+    &lt;p class="p-author h-card"&gt;Jón Jónsson&lt;/p&gt;
+    &lt;p class="p-summary"&gt;Woah that’s insightful.&lt;/p&gt;
+    &lt;p&gt;&lt;a class="u-url" href="http://jonsson.com/replies/1"&gt;
+      &lt;time class="dt-published" datetime="2014-03-01T14:00:25+00:00&gt;
+        2014-03-01 14:00
+      &lt;/time&gt;
+    &lt;/a&gt;&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/article&gt; </code></pre>
+<p>The reason comments are <code>h-cite</code>s instead of <code>h-entry</code>s is that <code>h-entry</code> implies syndication — it’s something you’ve posted, or have re-posted, whereas a comment is a reference to</p>
+<p>Or the address of a person or event, using <code>h-adr</code>:</p>
+<pre><code>&lt;div class="h-event"&gt;
+  &lt;h1 class="p-name"&gt;Microformats Meetup&lt;/h1&gt;
+  &lt;p&gt;Join us at &lt;b class="p-adr h-adr"&gt;
+    &lt;span class="p-street-address"&gt;Some Bar&lt;/span&gt;,
+    &lt;span class="p-locality"&gt;Someplace&lt;/span&gt;&lt;/b&gt;
+  &lt;/p&gt;
+&lt;/div&gt; </code></pre>
+<h2>Further Reading</h2>
+<p>Hopefully this overview tickled your interest and gave you a firm 
+foundation from which to base further investigation. To learn more about
+ the topics covered in this post, see the following URLs:</p>
+<ul><li>The <a href="http://microformats.org/wiki/microformats-2">Microformats 2 Wiki</a>, specifically:</li>
+<li><a href="http://microformats.org/wiki/microformats-2-parsing">Microformats 2 Parsing</a></li>
+<li><a href="http://microformats.org/wiki/microformats2-prefixes">Microformats 2 Prefixes</a></li>
+<li>The <a href="http://waterpigs.co.uk/presentations/microformats-2/#slide-2">Microformats 2: What’s New</a> presentation I gave at Exeter Web</li>
+</ul><p>This article reposted from <a class="u-repost-of" href="http://waterpigs.co.uk/articles/getting-started-with-microformats2/">Getting Started With microformats2 on waterpigs.co.uk</a>, and is the first of a series covering microformats2. Be sure to follow <a href="http://waterpigs.co.uk/articles">my articles feed</a> to be notified about the others. I also post <a href="http://waterpigs.co.uk/notes?tagged=microformats">notes</a> about microformats quite often. They’re syndicated to <a href="https://twitter.com/barnabywalters">my twitter account</a> too.</p>
+	        		</div>
+				
+		<span class="published-datetime">
+			<a class="u-url url" href="http://microformats.org/2014/03/05/getting-started-with-microformats2">			<time class="dt-published" datetime="2014-03-05T16:48:53+00:00">2014-03-05 16:48</time>
+			</a>		</span>
+		
+			</article>
+	</div>
+						
+			<ul class="article-tags clearfix">
+							<li><a class="p-category" rel="tag" href="http://waterpigs.co.uk/tags/microformats"><span class="muted">#</span><span class="p-category">microformats</span></a>
+							</li><li><a class="p-category" rel="tag" href="http://waterpigs.co.uk/tags/microformats2"><span class="muted">#</span><span class="p-category">microformats2</span></a>
+							</li><li><a class="p-category" rel="tag" href="http://waterpigs.co.uk/tags/html"><span class="muted">#</span><span class="p-category">html</span></a>
+						</li></ul>
+			
+			<p class="h-card vcard p-author author">
+				<img class="u-logo logo u-photo photo" alt="Barnaby Walters" src="getting-started-with-microformats2_files/photo.jpg"> 
+				<a class="p-name fn" href="http://waterpigs.co.uk/">Barnaby Walters</a> 
+				<a class="u-url url" href="http://waterpigs.co.uk/">waterpigs.co.uk</a>
+			</p>
+		</footer>
+	</article>
+</section><footer role="contentinfo" id="page-footer">
+	<small>
+		<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+			<img alt="Creative Commons Attribution-ShareAlike 3.0 Unported License" src="getting-started-with-microformats2_files/80x15.png"></a>
+		
+		Typeset in <a href="http://iotic.com/averia/">Averia</a>.
+		
+		Profile photos by <a rel="friend met" class="h-card" href="http://byjovephotography.com/">Jovian Salak</a>.
+		
+		This site is built from <a href="http://taprootproject.com/">Taproot</a>.
+		
+				<form class="authentication" accept-charset="utf-8" action="/login/" method="post">
+			<input name="me" placeholder="yourdomain.com" type="url">
+			<button type="submit">Log In</button>
+		</form>
+			</small>
+</footer>
+<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+chromium.org/developers/how-tos/chrome-frame-getting-started -->
+<!--[if lt IE 7 ]>
+<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
+
+</body></html>

@@ -1,0 +1,14 @@
+{
+	"name": "xmlcomp",
+	"description": "A comparison of D HTML libraries",
+	"copyright": "Copyright © 2014, krendil",
+	"authors": ["krendil"],
+	"dependencies": {
+        "kxml" : "~master",
+        "gumbo-d" : "~master"
+	},
+    "buildRequirements" : [ "allowWarnings" ],
+    "importPaths" :  [ "include" ],
+    "stringImportPaths" : [ "data" ]
+
+}

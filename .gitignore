@@ -1,0 +1,13 @@
+#Cache folders for tools
+.dub/
+
+*.swp
+
+#Files only useful on dev machine
+tags
+
+#Executables and build artifacts
+/appname
+*.o
+
+
