@@ -1,14 +1,18 @@
 {
-	"name": "xmlcomp",
+	"name": "htmlcomp",
 	"description": "A comparison of D HTML libraries",
-	"copyright": "Copyright © 2014, krendil",
-	"authors": ["krendil"],
+	"copyright": "Copyright © 2014, David Osborne",
+	"authors": ["David Osborne"],
 	"dependencies": {
+        "gumbo-d" : "~master",
         "kxml" : "~master",
-        "gumbo-d" : "~master"
+        "tango" : "~d2port"
 	},
     "buildRequirements" : [ "allowWarnings" ],
-    "importPaths" :  [ "include" ],
-    "stringImportPaths" : [ "data" ]
+    "sourceFiles" :  [ 
+        "include/arsd/dom.d",
+        "include/arsd/characterencodings.d",
+    ],
+    "stringImportPaths" : [ "data" ],
 
 }

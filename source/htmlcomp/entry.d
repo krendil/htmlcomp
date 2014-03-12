@@ -5,7 +5,7 @@ import std.datetime;
 struct Entry {
     string name;
     string author;
-    DateTime published;
+    SysTime published;
     string summary;
     string content;
 }
