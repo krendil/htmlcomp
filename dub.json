@@ -5,8 +5,6 @@
 	"authors": ["David Osborne"],
 	"dependencies": {
         "gumbo-d" : "~master",
-        "kxml" : "~master",
-        "tango" : "~d2port"
 	},
     "buildRequirements" : [ "allowWarnings" ],
     "sourceFiles" :  [ 
@@ -14,5 +12,6 @@
         "include/arsd/characterencodings.d",
     ],
     "stringImportPaths" : [ "data" ],
+    "excludedSourceFiles" : [ "source/htmlcomp/kxml.d", "source/htmlcomp/tango.d" ],
 
 }
