@@ -7,7 +7,7 @@
 tags
 
 #Executables and build artifacts
-/appname
+/htmlcomp
 *.o
 
 
